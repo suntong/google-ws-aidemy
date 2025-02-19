@@ -9,17 +9,14 @@ ENDPOINT_ID = os.environ.get("DS_ENDPOINT_ID", "")
 PROJECT_NUMBER= os.environ.get("GOOGLE_CLOUD_PROJECT_NUMBER", "") 
 
 
-
-aiplatform.init(project=PROJECT_ID, location=LOCATION)
-endpoint = aiplatform.Endpoint(f"projects/{PROJECT_NUMBER}/locations/{LOCATION}/endpoints/{ENDPOINT_ID}")
-
-
-
 class State(TypedDict):
     teaching_plan: str
     model_one_assignment: str
     model_two_assignment: str
     final_assignment: str
+
+aiplatform.init(project=PROJECT_ID, location=LOCATION)
+endpoint = aiplatform.Endpoint(f"projects/{PROJECT_NUMBER}/locations/{LOCATION}/endpoints/{ENDPOINT_ID}")
 
 def gen_assignment_deepseek(state):
     print(f"---------------gen_assignment_deepseek")
