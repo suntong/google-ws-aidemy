@@ -25,8 +25,6 @@ def connect_with_connector() -> sqlalchemy.engine.base.Engine:
 
 
     ip_type = IPTypes.PRIVATE if os.environ.get("PRIVATE_IP") else IPTypes.PUBLIC
-
-    # initialize Cloud SQL Python Connector object
     connector = Connector()
 
     def getconn() -> pg8000.dbapi.Connection:
@@ -64,31 +62,6 @@ def init_connection_pool() -> sqlalchemy.engine.base.Engine:
         "Missing database connection type. Please define one of INSTANCE_HOST, INSTANCE_UNIX_SOCKET, or INSTANCE_CONNECTION_NAME"
     )
 
-def get_curriculum(year: int, subject: str):
-    """
-    Get school curriculum
-    
-    Args:
-        subject: User's request subject string
-        year: User's request year int
-    """
-    try:
-        stmt = sqlalchemy.text(
-            "SELECT description FROM curriculums WHERE year = :year AND subject = :subject"
-        )
-
-        with db.connect() as conn:
-            result = conn.execute(stmt, parameters={"year": year, "subject": subject})
-            row = result.fetchone()
-        if row:
-            return row[0]  
-        else:
-            return None  
-
-    except Exception as e:
-        print(e)
-        return None
 
 db = init_connection_pool()
 
-#print(get_curriculum(6, "Mathematics"))

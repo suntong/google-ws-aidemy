@@ -7,7 +7,7 @@ from google.cloud import pubsub_v1
 app = Flask(__name__)
 PROJECT_ID = os.environ.get("GOOGLE_CLOUD_PROJECT")
 
-#curl -X POST -F year=6 -F subject="Mathematics" -F addon="Geometry" http://127.0.0.1:8080/
+
 @app.route('/', methods=['GET', 'POST'])
 def index():
     subjects = ['English', 'Mathematics', 'Science', 'Social Studies', 'Art', 'Music', 'Physical Education']
@@ -26,17 +26,7 @@ def index():
 
 
 
-def send_plan_event(teaching_plan:str):
-    publisher = pubsub_v1.PublisherClient()
-    print(f"-------------> PROJECT_ID: {PROJECT_ID}")
-    topic_path = publisher.topic_path(PROJECT_ID, "plan")
 
-    message_data = {"teaching_plan": teaching_plan} 
-    data = json.dumps(message_data).encode("utf-8") 
-
-    future = publisher.publish(topic_path, data)
-    print(f"Published message ID: {future.result()}")
-    return "Published"
 
 
 
