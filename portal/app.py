@@ -117,60 +117,15 @@ def download_course_audio(week):
 
 
 
-@app.route('/new_teaching_plan', methods=['POST'])
-def new_teaching_plan():
-    try:
-        # Get data from Pub/Sub message delivered via Eventarc
-        envelope = request.get_json()
-        if not envelope:
-            return jsonify({'error': 'No Pub/Sub message received'}), 400
 
-        if not isinstance(envelope, dict) or 'message' not in envelope:
-            return jsonify({'error': 'Invalid Pub/Sub message format'}), 400
-
-        pubsub_message = envelope['message']
-
-        data = json.loads(base64.b64decode(pubsub_message['data']).decode())
-
-        print(f"File content: {data['teaching_plan']}")
-
-        with open("teaching_plan.txt", "w") as f:
-            f.write(data['teaching_plan'])
-
-        print(f"Teaching plan saved to local file: teaching_plan.txt")
-
-        return jsonify({'message': 'File processed successfully'})
-
-    except Exception as e:
-        print(f"Error processing file: {e}")
-        return jsonify({'error': 'Error processing file'}), 500
+#ADD your code here
 
 
-@app.route('/render_assignment', methods=['POST'])
-def render_assignment():
-    try:
-        data = request.get_json()
-        file_name = data.get('name')
-        bucket_name = data.get('bucket')
 
-        if not file_name or not bucket_name:
-            return jsonify({'error': 'Missing file name or bucket name'}), 400
 
-        storage_client = storage.Client()
-        bucket = storage_client.bucket(bucket_name)
-        blob = bucket.blob(file_name)
-        content = blob.download_as_text()
 
-        print(f"File content: {content}")
+#ADD your code here
 
-        render_assignment_page(content)
-
-        return jsonify({'message': 'Assignment rendered successfully'})
-
-    except Exception as e:
-        print(f"Error processing file: {e}")
-        return jsonify({'error': 'Error processing file'}), 500
-        
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))

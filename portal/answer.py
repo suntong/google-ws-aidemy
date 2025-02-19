@@ -5,8 +5,8 @@ from langchain_core.prompts import PromptTemplate, ChatPromptTemplate
 from langchain_core.messages import HumanMessage, SystemMessage
 
 
-llm = VertexAI(model_name="gemini-2.0-flash-thinking-exp-01-21")
-#llm = VertexAI(model_name="gemini-2.0-flash-001")
+
+llm = VertexAI(model_name="gemini-2.0-flash-001")
 
 def answer_thinking(question, options, correct_answer):
     try:

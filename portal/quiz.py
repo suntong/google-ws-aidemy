@@ -19,40 +19,4 @@ llm = VertexAI(model_name="gemini-2.0-flash-001")
 
 
 
-def generate_quiz_question(file_name: str, difficulty: str, ):
-    """Generates a single multiple-choice quiz question using the LLM.
-   
-    ```json
-    {
-      "question": "The question itself",
-      "options": ["Option A", "Option B", "Option C", "Option D"],
-      "answer": "The correct answer letter (A, B, C, or D)"
-    }
-    ```
-    """
 
-    plan=None
-    #load the file using file_name and read content into string call plan
-    with open(file_name, 'r') as f:
-        plan = f.read()
-
-    parser = JsonOutputParser(pydantic_object=QuizQuestion)
-
-
-    instruction = f"You'll provide one question with difficulty level of {difficulty}, 4 options as multiple choices and provide the anwsers, the quiz needs to be related to the teaching plan {plan}"
-
-    prompt = PromptTemplate(
-        template="Generates a single multiple-choice quiz question\n {format_instructions}\n  {instruction}\n",
-        input_variables=["instruction"],
-        partial_variables={"format_instructions": parser.get_format_instructions()},
-    )
-    
-    chain = prompt | llm | parser
-    response = chain.invoke({"instruction": instruction})
-
-    print(f"{response}")
-    return  response
-
-
-
-# generate_quiz_question("teaching_plan.txt", "hard")
