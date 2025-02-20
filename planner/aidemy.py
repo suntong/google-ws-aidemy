@@ -24,5 +24,5 @@ from book import recommend_book
 project_id = os.environ.get("GOOGLE_CLOUD_PROJECT")  # Get project ID from env
 
 # Connect to resourse needed from Google Cloud
-llm = ChatVertexAI(model_name="gemini-2.0-flash-001")
+llm = ChatVertexAI(model_name="gemini-1.5-flash-002")
 
