@@ -25,10 +25,7 @@ def index():
     return render_template('index.html', years=years, subjects=subjects, teaching_plan=None, assignment=None)
 
 
-
-
-
-
+# Add your code here
 
 
 if __name__ == "__main__":
