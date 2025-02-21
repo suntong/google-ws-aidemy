@@ -40,9 +40,8 @@ def generate_quiz():
     time.sleep(59) 
     quiz = []
     quiz.append(generate_quiz_question("teaching_plan.txt", "easy","east"))
-    time.sleep(59) 
     quiz.append(generate_quiz_question("teaching_plan.txt", "medium","central"))
-    
+    quiz.append(generate_quiz_question("teaching_plan.txt", "hard","west"))
     return jsonify(quiz)
 
 
