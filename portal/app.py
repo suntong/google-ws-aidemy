@@ -37,17 +37,12 @@ def assignment():
 @app.route('/generate_quiz', methods=['GET'])
 def generate_quiz():
     """Generates a quiz with a specified number of questions."""
-
-    #num_questions = 5  # Default number of questions
-    # Can I turn this into Langgraph
+    time.sleep(59) 
     quiz = []
-    for _ in range(1):
-        quiz.append(generate_quiz_question("teaching_plan.txt", "easy"))
-    for _ in range(1):
-        quiz.append(generate_quiz_question("teaching_plan.txt", "medium"))
-    for _ in range(1):
-        quiz.append(generate_quiz_question("teaching_plan.txt", "hard"))
-
+    quiz.append(generate_quiz_question("teaching_plan.txt", "easy","east"))
+    time.sleep(59) 
+    quiz.append(generate_quiz_question("teaching_plan.txt", "medium","central"))
+    
     return jsonify(quiz)
 
 
