@@ -18,17 +18,9 @@ from langgraph.prebuilt import tools_condition
 from curriculums import get_curriculum 
 from search import search_latest_resource 
 from book import recommend_book 
+from onramp_workaround import get_next_region
 
 from google.cloud import pubsub_v1
 
 
 PROJECT_ID = os.environ.get("GOOGLE_CLOUD_PROJECT")  # Get project ID from env
-
-
-
-
-project_id = os.environ.get("GOOGLE_CLOUD_PROJECT")  # Get project ID from env
-
-# Connect to resourse needed from Google Cloud
-llm = ChatVertexAI(model_name="gemini-1.5-flash-001",location="us-west1")
-
