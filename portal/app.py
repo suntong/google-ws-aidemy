@@ -50,7 +50,6 @@ def generate_quiz():
 
 
 
-
 @app.route('/check_answers', methods=['POST'])
 def check_answers():
     try:
@@ -76,17 +75,20 @@ def check_answers():
 
             is_correct = (user_answer == correct_answer)
 
+            reasoning=None
             if(not is_correct):
+                time.sleep(60)
                 region = get_next_thinking_region()
                 reasoning = answer_thinking(question, options, user_answer, correct_answer, region)
-
+            else:
+                reasoning = "You are correct!"
 
             results.append({
                 "question": question,
                 "user_answer": user_answer,
                 "correct_answer": correct_answer,
                 "is_correct": is_correct,
-                "reasoning": reasoning if not is_correct else "You are correct!"
+                "reasoning": reasoning
             })
 
         return jsonify(results)
@@ -94,6 +96,7 @@ def check_answers():
     except Exception as e:
         print(f"Error checking answers: {e}")
         return jsonify({"error": str(e)}), 500
+
 
 
 @app.route('/download_course_audio/<int:week>')
