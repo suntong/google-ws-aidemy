@@ -8,7 +8,7 @@ from quiz import generate_quiz_question
 from answer import answer_thinking
 from google.cloud import storage  
 
-from render import render_assignment_page
+#from render import render_assignment_page
 
 # ENV SETUP
 project_id = os.environ.get("GOOGLE_CLOUD_PROJECT")  # Get project ID from env
