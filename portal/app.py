@@ -1,19 +1,20 @@
 import os
 import json
-import time
 import base64
 from flask import Flask, render_template, request, jsonify, send_from_directory
 
 from langchain_google_vertexai import ChatVertexAI
 from quiz import generate_quiz_question
 from answer import answer_thinking
+from onramp_workaround import get_next_region,get_next_thinking_region
 from google.cloud import storage  
 
-#from render import render_assignment_page
+from render import render_assignment_page
 
 # ENV SETUP
 project_id = os.environ.get("GOOGLE_CLOUD_PROJECT")  # Get project ID from env
-COURSE_BUCKET_NAME = os.environ.get("COURSE_BUCKET_NAME", "")  
+COURSE_BUCKET_NAME = os.environ.get("COURSE_BUCKET_NAME", "aidemy-course")  
+
 
 app = Flask(__name__)
 
@@ -38,11 +39,13 @@ def assignment():
 @app.route('/generate_quiz', methods=['GET'])
 def generate_quiz():
     """Generates a quiz with a specified number of questions."""
-    time.sleep(59) 
+    #num_questions = 5  # Default number of questions
+    # Can I turn this into Langgraph
     quiz = []
-    quiz.append(generate_quiz_question("teaching_plan.txt", "easy","east"))
-    quiz.append(generate_quiz_question("teaching_plan.txt", "medium","central"))
-    quiz.append(generate_quiz_question("teaching_plan.txt", "hard","west"))
+    quiz.append(generate_quiz_question("teaching_plan.txt", "easy", get_next_region()))
+    quiz.append(generate_quiz_question("teaching_plan.txt", "medium", get_next_region()))
+    quiz.append(generate_quiz_question("teaching_plan.txt", "hard", get_next_region()))
+
     return jsonify(quiz)
 
 
@@ -71,10 +74,12 @@ def check_answers():
             print(f"User Answer: {user_answer}")
             print(f"Correct Answer: {correct_answer}")
 
-
-            reasoning = answer_thinking(question, options, correct_answer)
-
             is_correct = (user_answer == correct_answer)
+
+            if(not is_correct):
+                region = get_next_thinking_region()
+                reasoning = answer_thinking(question, options, user_answer, correct_answer, region)
+
 
             results.append({
                 "question": question,
@@ -112,15 +117,9 @@ def download_course_audio(week):
 
 
 
-
-#ADD your code here
-
-
-
-
-
-#ADD your code here
-
+## Add your code here
+        
+## Add your code here
 
 if __name__ == "__main__":
     app.run(debug=True, host="0.0.0.0", port=int(os.environ.get("PORT", 8080)))
