@@ -18,8 +18,14 @@ def index():
         addon_request = request.form['addon']
 
         # Call prep_class to get teaching plan and assignment
-        teaching_plan = prep_class(f"I'm doing a course for year {selected_year} on subject {selected_subject} in {addon_request}, get school curriculum, and come up with a few book recommendations plus search the latest resources on the internet based on the curriculum outcome. And come up with a 3-week teaching plan.")
-        
+        # Call prep_class to get teaching plan and assignment
+        teaching_plan = prep_class(
+            f"""I'm doing a course for year {selected_year} on subject {selected_subject} in {addon_request}, 
+            get school curriculum, 
+            and come up with a few book recommendations 
+            plus search the latest resources on the internet based on the curriculum outcome. 
+            And come up with a 3-week teaching plan.
+            """)
         return jsonify({'teaching_plan': teaching_plan})
     return render_template('index.html', years=years, subjects=subjects, teaching_plan=None, assignment=None)
 
