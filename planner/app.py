@@ -20,12 +20,12 @@ def index():
         # Call prep_class to get teaching plan and assignment
         # Call prep_class to get teaching plan and assignment
         teaching_plan = prep_class(
-            f"""I'm doing a course for year {selected_year} on subject {selected_subject} in {addon_request}, 
-            get school curriculum, 
-            and come up with a few book recommendations 
-            plus search the latest resources on the internet based on the curriculum outcome. 
-            And come up with a 3-week teaching plan.
-            """)
+            f"""For a year {selected_year} course on {selected_subject} covering {addon_request}, generate a 3-week teaching plan. 
+            Incorporate the school curriculum, 
+            book recommendations, 
+            and relevant online resources aligned with the curriculum outcome. 
+            After generating the plan,
+            Return ONLY the teaching plan as the final output. Do not add conversation at all.""")
         return jsonify({'teaching_plan': teaching_plan})
     return render_template('index.html', years=years, subjects=subjects, teaching_plan=None, assignment=None)
 
