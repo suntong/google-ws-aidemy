@@ -1,6 +1,3 @@
-
-#https://cloud.google.com/functions/docs/tutorials/pubsub#functions-prepare-environment-python
-
 import os
 import json
 import base64
@@ -23,10 +20,8 @@ PROJECT_ID = os.environ.get("GOOGLE_CLOUD_PROJECT")
 ASSIGNMENT_BUCKET = os.environ.get("ASSIGNMENT_BUCKET","")
 
 
-
 class State(TypedDict):
     teaching_plan: str
     model_one_assignment: str
     model_two_assignment: str
     final_assignment: str
-
