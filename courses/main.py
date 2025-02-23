@@ -6,5 +6,4 @@ import functions_framework
 from audio import breakup_sessions 
 
 PROJECT_ID = os.environ.get("GOOGLE_CLOUD_PROJECT")
-COURSE_BUCKET_NAME = os.environ.get("COURSE_BUCKET_NAME", "")
 
