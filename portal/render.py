@@ -8,5 +8,3 @@ from langchain_core.prompts import PromptTemplate, ChatPromptTemplate
 from langchain_core.messages import HumanMessage, SystemMessage
 from onramp_workaround import get_next_region
 
-def render_assignment_page():
-    return ""
