@@ -25,7 +25,7 @@ def index():
             book recommendations, 
             and relevant online resources aligned with the curriculum outcome. 
             After generating the plan,
-            Return ONLY the teaching plan as the final output. Do not add conversation at all.""")
+            Return ONLY the teaching plan in the markdown format as the final output. Do not add conversation at all.""")
         return jsonify({'teaching_plan': teaching_plan})
     return render_template('index.html', years=years, subjects=subjects, teaching_plan=None, assignment=None)
 
