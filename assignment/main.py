@@ -12,7 +12,7 @@ from langgraph.graph import StateGraph, START, END
 from langgraph.graph import MessagesState
 from langgraph.prebuilt import ToolNode
 from langgraph.prebuilt import tools_condition
-from gemini2 import gen_assignment_gemini,combine_assignments
+from gemini import gen_assignment_gemini,combine_assignments
 from deepseek import gen_assignment_deepseek
 from typing import TypedDict
 
