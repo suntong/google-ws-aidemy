@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>Aidemy Course Planner</title>
+    <title>Aidemy Planner</title>
     <style>
         
         #loading-overlay { /* Styles for the loading overlay */
@@ -38,30 +38,40 @@
     <div id="loading-overlay" style="display:none;">  <!-- Initially hidden -->
         <div id="loading-spinner"></div>
     </div>
-    <h1>Curriculum Planner</h1>
-    <form method="POST" id="planner-form">
-        <label for="year">Year:</label>
-        <select name="year" id="year">
-            {% for year in years %}
-                <option value="{{ year }}">{{ year }}</option>
-            {% endfor %}
-        </select>
+    <div class="card-container">
+        <div class="card-container-wrapper">
+        <div class="card-container">
+        <div class="card">
+            <h1>Aidemy Planner</h1>
+            <form method="POST" id="planner-form">
+                <label for="year">Year:</label>
+                <select name="year" id="year">
+                    {% for year in years %}
+                        <option value="{{ year }}">{{ year }}</option>
+                    {% endfor %}
+                </select>
 
-        <label for="subject">Subject:</label>
-        <select name="subject" id="subject">
-            {% for subject in subjects %}
-                <option value="{{ subject }}">{{ subject }}</option>
-            {% endfor %}
-        </select>
+                <label for="subject">Subject:</label>
+                <select name="subject" id="subject">
+                    {% for subject in subjects %}
+                        <option value="{{ subject }}">{{ subject }}</option>
+                    {% endfor %}
+                </select>
 
-        <label for="addon">Add-on Request:</label>
-        <input type="text" name="addon" id="addon">
+                <label for="addon">Add-on Request:</label>
+                <input type="text" name="addon" id="addon">
 
-        <button type="submit">Generate Plan</button>
-    </form>
+                <button type="submit">Generate Plan</button>
+            </form>
+        </div>
+        <div class="card">
+            <div id="markdown-output"></div>
+        </div> 
+        </div>
+        </div>
+    </div>
 
-
-    <div id="markdown-output"></div>  <!-- Markdown output OUTSIDE the form -->
+    <!-- Markdown output OUTSIDE the form -->
 
     <script src="https://cdn.jsdelivr.net/npm/marked/marked.min.js"></script>
     <script>
