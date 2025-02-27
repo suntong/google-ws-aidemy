@@ -9,8 +9,8 @@ PROJECT_ID = os.environ.get("GOOGLE_CLOUD_PROJECT")
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
-    subjects = ['English', 'Mathematics', 'Science', 'Social Studies', 'Art', 'Music', 'Physical Education']
-    years = list(range(5, 10))
+    subjects = ['English', 'Mathematics', 'Science', 'Computer Science']
+    years = list(range(5, 8))
 
     if request.method == 'POST':
         selected_year = int(request.form['year'])
