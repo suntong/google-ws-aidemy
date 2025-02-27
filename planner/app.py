@@ -2,6 +2,7 @@ import os
 import json
 from flask import Flask, render_template, request, jsonify, send_file, render_template_string
 from aidemy import prep_class  
+from google.cloud import pubsub_v1
 
 app = Flask(__name__)
 PROJECT_ID = os.environ.get("GOOGLE_CLOUD_PROJECT")
