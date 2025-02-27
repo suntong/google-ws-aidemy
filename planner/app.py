@@ -6,6 +6,7 @@ from aidemy import prep_class
 app = Flask(__name__)
 PROJECT_ID = os.environ.get("GOOGLE_CLOUD_PROJECT")
 
+##ADD SEND PLAN EVENT FUNCTION HERE
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
@@ -18,7 +19,6 @@ def index():
         addon_request = request.form['addon']
 
         # Call prep_class to get teaching plan and assignment
-        # Call prep_class to get teaching plan and assignment
         teaching_plan = prep_class(
             f"""For a year {selected_year} course on {selected_subject} covering {addon_request}, 
             Incorporate the school curriculum, 
@@ -28,6 +28,9 @@ def index():
             return the teaching plan in markdown format
             """
         )
+
+        ### ADD send_plan_event CALL
+        
         return jsonify({'teaching_plan': teaching_plan})
     return render_template('index.html', years=years, subjects=subjects, teaching_plan=None, assignment=None)
 
