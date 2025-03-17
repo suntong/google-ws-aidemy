@@ -59,8 +59,8 @@
                     <ul class="options">
                         ${questionData.options.map((option, optionIndex) => `
                             <li>
-                                <input type="radio" name="q${index}" value="${String.fromCharCode(65 + optionIndex)}">
-                                ${option}
+                                <input type="radio" id="q${index}-${optionIndex}" name="q${index}" value="${String.fromCharCode(65 + optionIndex)}">
+                                <label for="q${index}-${optionIndex}">${option}</label>
                             </li>
                         `).join('')}
                     </ul>
